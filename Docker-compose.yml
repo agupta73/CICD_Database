@@ -1,0 +1,9 @@
+docker run --name mysql3 -idt -e MYSQL_ROOT_HOST=% -p 3307:3306 \
+--mount type=bind,src=/Users/agupta/MySQL_Conf/my.cnf,dst=/etc/my.cnf \
+--mount type=bind,src=/Users/agupta/MySQL_Data,dst=/var/lib/mysql \
+agupta73/cicd_database
+
+# Running other application connecting to the mysql network
+docker run --name=myapp1 --network=CCID-Network -d myapp
+
+docker exec -it myapp1 mysql --host=mysql1 --user=myuser --password
